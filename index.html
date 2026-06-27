@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aditya M Prajapati | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0a0e1a;
+      --bg2:       #111827;
+      --bg3:       #1a2236;
+      --accent:    #3b82f6;
+      --accent2:   #60a5fa;
+      --glow:      rgba(59,130,246,0.18);
+      --text:      #e2e8f0;
+      --muted:     #94a3b8;
+      --border:    rgba(59,130,246,0.18);
+      --font:      'Space Grotesk', sans-serif;
+      --mono:      'JetBrains Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 2.5rem;
+      background: rgba(10,14,26,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 1rem;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none;
+      font-size: 0.9rem; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent2); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 70% 40%, rgba(59,130,246,0.1) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% 70%, rgba(99,102,241,0.07) 0%, transparent 70%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0; z-index: 0; opacity: 0.04;
+      background-image: linear-gradient(var(--accent) 1px, transparent 1px),
+                        linear-gradient(90deg, var(--accent) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 700px; }
+    .hero-tag {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--accent);
+      background: rgba(59,130,246,0.1);
+      border: 1px solid var(--border);
+      padding: 0.3rem 0.8rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.08em;
+    }
+    .hero-name {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .hero-name span {
+      background: linear-gradient(135deg, #60a5fa, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      max-width: 520px;
+    }
+    .hero-sub strong { color: var(--accent2); font-weight: 600; }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.75rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 0 20px rgba(59,130,246,0.3);
+    }
+    .btn-primary:hover {
+      background: var(--accent2);
+      box-shadow: 0 0 28px rgba(59,130,246,0.5);
+      transform: translateY(-1px);
+    }
+    .btn-outline {
+      border: 1px solid var(--border);
+      color: var(--text);
+      background: transparent;
+    }
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent2);
+      background: var(--glow);
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 5rem 2rem; max-width: 900px; margin: 0 auto; }
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 2.5rem;
+      color: var(--text);
+    }
+    .divider {
+      width: 48px; height: 3px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      border-radius: 2px;
+      margin-bottom: 2.5rem;
+      margin-top: -1.5rem;
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+    .about-text { color: var(--muted); font-size: 1rem; line-height: 1.8; }
+    .about-text p + p { margin-top: 1rem; }
+    .about-text strong { color: var(--text); }
+    .about-cards { display: flex; flex-direction: column; gap: 1rem; }
+    .about-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.2rem 1.4rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .about-card-icon { font-size: 1.5rem; }
+    .about-card-title { font-size: 0.85rem; color: var(--muted); }
+    .about-card-val { font-size: 1rem; font-weight: 600; color: var(--text); }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--bg2); max-width: 100%; padding: 5rem 2rem; }
+    #skills > * { max-width: 900px; margin-left: auto; margin-right: auto; }
+    #skills .section-title, #skills .section-label, #skills .divider { max-width: 900px; margin-left: auto; margin-right: auto; display: block; }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .skill-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.4rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .skill-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .skill-card-title {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.8rem;
+      text-transform: uppercase;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .skill-tag {
+      background: rgba(59,130,246,0.1);
+      border: 1px solid rgba(59,130,246,0.2);
+      color: var(--text);
+      font-size: 0.82rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 6px;
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.8rem;
+      transition: border-color 0.2s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent), #818cf8);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .project-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .project-card:hover::before { opacity: 1; }
+    .project-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+    .project-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .project-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.7; margin-bottom: 1.2rem; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .project-tag {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--accent2);
+      background: rgba(59,130,246,0.08);
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+    }
+
+    /* ── EDUCATION ── */
+    .edu-timeline { display: flex; flex-direction: column; gap: 1.5rem; }
+    .edu-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 12px 12px 0;
+      padding: 1.5rem 1.8rem;
+      transition: border-color 0.2s;
+    }
+    .edu-card:hover { border-left-color: var(--accent2); }
+    .edu-degree { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .edu-school { color: var(--accent2); font-size: 0.9rem; margin-bottom: 0.5rem; }
+    .edu-meta { color: var(--muted); font-size: 0.85rem; font-family: var(--mono); }
+    .edu-sgpa {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      margin-top: 0.8rem;
+    }
+    .sgpa-pill {
+      background: rgba(59,130,246,0.1);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.8rem;
+      font-family: var(--mono);
+      color: var(--text);
+    }
+    .sgpa-pill span { color: var(--accent2); font-weight: 600; }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--bg2); max-width: 100%; padding: 5rem 2rem; }
+    .contact-inner { max-width: 900px; margin: 0 auto; }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    .contact-info { color: var(--muted); font-size: 1rem; line-height: 1.8; }
+    .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-link {
+      display: flex; align-items: center; gap: 1rem;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.2rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .contact-link:hover { border-color: var(--accent); transform: translateX(4px); color: var(--accent2); }
+    .contact-link-icon { font-size: 1.3rem; }
+    .contact-link-text { font-size: 0.9rem; }
+    .contact-link-label { font-size: 0.75rem; color: var(--muted); display: block; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-family: var(--mono);
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1.2rem; }
+      .nav-links { gap: 1rem; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">&lt;adi.dev /&gt;</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag">// Available for opportunities</div>
+    <h1 class="hero-name">Aditya M<br/><span>Prajapati</span></h1>
+    <p class="hero-sub">
+      BCA Student &amp; <strong>Aspiring Software Developer</strong> from Gujarat, India.
+      Building my skills in C++, Web Development, and problem solving — one project at a time.
+    </p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn btn-primary">View My Work</a>
+      <a href="#contact" class="btn btn-outline">Get In Touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">// 01 — who i am</div>
+  <h2 class="section-title">About Me</h2>
+  <div class="divider"></div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>
+        Hey! I'm <strong>Aditya</strong>, a 3rd year BCA student at Dinsha Patel College of Computer Science, Vadodara. I'm passionate about technology and have a strong desire to grow as a <strong>Software Developer</strong>.
+      </p>
+      <p>
+        I've been consistently improving my academic performance — from 6.1 SGPA in my first semester to 7.5 in my third — and I bring that same growth mindset to everything I do.
+      </p>
+      <p>
+        My long-term goal is to pursue a <strong>Master's degree in Australia</strong> and build a career in software engineering on a global level.
+      </p>
+    </div>
+    <div class="about-cards">
+      <div class="about-card">
+        <div class="about-card-icon">🎓</div>
+        <div>
+          <div class="about-card-title">Currently Studying</div>
+          <div class="about-card-val">BCA — 3rd Year</div>
+        </div>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">📍</div>
+        <div>
+          <div class="about-card-title">Location</div>
+          <div class="about-card-val">Kapadwanj, Gujarat, India</div>
+        </div>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">🎯</div>
+        <div>
+          <div class="about-card-title">Goal</div>
+          <div class="about-card-val">Masters in Australia 🇦🇺</div>
+        </div>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">💬</div>
+        <div>
+          <div class="about-card-title">Languages</div>
+          <div class="about-card-val">Gujarati, Hindi, English</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">// 02 — what i know</div>
+  <h2 class="section-title">Technical Skills</h2>
+  <div class="divider"></div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-card-title">Programming</div>
+      <div class="skill-tags">
+        <span class="skill-tag">C++ (Basic)</span>
+        <span class="skill-tag">OOP Concepts</span>
+        <span class="skill-tag">Problem Solving</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title">Web Development</div>
+      <div class="skill-tags">
+        <span class="skill-tag">HTML5</span>
+        <span class="skill-tag">CSS3</span>
+        <span class="skill-tag">Responsive Design</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title">Tools & Software</div>
+      <div class="skill-tags">
+        <span class="skill-tag">MS Word</span>
+        <span class="skill-tag">MS Excel</span>
+        <span class="skill-tag">MS PowerPoint</span>
+        <span class="skill-tag">Google Docs</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title">Version Control</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Git (Learning)</span>
+        <span class="skill-tag">GitHub (Learning)</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title">Operating Systems</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Windows 10/11</span>
+        <span class="skill-tag">Linux (Basic)</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title">Soft Skills</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Team Player</span>
+        <span class="skill-tag">Fast Learner</span>
+        <span class="skill-tag">Communication</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">// 03 — what i've built</div>
+  <h2 class="section-title">Projects</h2>
+  <div class="divider"></div>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-icon">🗄️</div>
+      <div class="project-title">Student Record Management System</div>
+      <p class="project-desc">
+        A database-driven system to manage student academic records with data entry forms, search functionality, and automated report generation. Focused on data accuracy and a clean, organized file structure.
+      </p>
+      <div class="project-tags">
+        <span class="project-tag">MS Access</span>
+        <span class="project-tag">Database</span>
+        <span class="project-tag">College Project</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-icon">🌐</div>
+      <div class="project-title">Personal Portfolio Website</div>
+      <p class="project-desc">
+        Built this portfolio from scratch using pure HTML and CSS — no frameworks. Includes About, Skills, Projects, Education and Contact sections with a fully responsive dark theme layout.
+      </p>
+      <div class="project-tags">
+        <span class="project-tag">HTML5</span>
+        <span class="project-tag">CSS3</span>
+        <span class="project-tag">Responsive</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-label">// 04 — my journey</div>
+  <h2 class="section-title">Education</h2>
+  <div class="divider"></div>
+  <div class="edu-timeline">
+    <div class="edu-card">
+      <div class="edu-degree">Bachelor of Computer Applications (BCA)</div>
+      <div class="edu-school">Dinsha Patel College of Computer Science, Vadodara</div>
+      <div class="edu-meta">2023 – Present &nbsp;|&nbsp; MAM University</div>
+      <div class="edu-sgpa">
+        <div class="sgpa-pill">Sem 1 — <span>6.1 SGPA</span></div>
+        <div class="sgpa-pill">Sem 2 — <span>6.9 SGPA</span></div>
+        <div class="sgpa-pill">Sem 3 — <span>7.5 SGPA</span></div>
+      </div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">12th Standard</div>
+      <div class="edu-school">Shri Swaminarayan High School, Kapadwanj</div>
+      <div class="edu-meta">2022 &nbsp;|&nbsp; GSEB &nbsp;|&nbsp; 65.85%</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="section-label">// 05 — say hello</div>
+    <h2 class="section-title">Get In Touch</h2>
+    <div class="divider"></div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p>I'm currently open to internships, entry-level opportunities, and collaborations. Whether you have a project idea or just want to connect — feel free to reach out!</p>
+        <br/>
+        <p>📍 Kapadwanj, Kheda, Gujarat — 387620</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:adityamprajapti141106@gmail.com" class="contact-link">
+          <span class="contact-link-icon">📧</span>
+          <span class="contact-link-text">
+            <span class="contact-link-label">Email</span>
+            adityamprajapti141106@gmail.com
+          </span>
+        </a>
+        <a href="tel:+919773037638" class="contact-link">
+          <span class="contact-link-icon">📱</span>
+          <span class="contact-link-text">
+            <span class="contact-link-label">Phone</span>
+            +91 9773037638
+          </span>
+        </a>
+        <a href="https://www.linkedin.com/in/adi-mprajapati-618315318" target="_blank" class="contact-link">
+          <span class="contact-link-icon">💼</span>
+          <span class="contact-link-text">
+            <span class="contact-link-label">LinkedIn</span>
+            adi-mprajapati-618315318
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  &lt;made with ❤️ by Aditya M Prajapati /&gt;
+</footer>
+
+</body>
+</html>
